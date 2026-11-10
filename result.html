@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Result Portal</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #fce7f3;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px #ccc;
+        }
+
+        h2 {
+            color: #1e3a8a;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #1e40af;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>College Result Portal</h2>
+
+    <p>Enter Register Number</p>
+
+    <input type="text" id="regno"
+           placeholder="Enter Register Number">
+
+    <br>
+
+    <button onclick="checkResult()">Click Here</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+    let students = {
+
+        "26MCA026": {
+            name: "Sangeetha",
+            tamil: 85,
+            english: 90,
+            java: 95,
+            python: 88
+        },
+
+        "26MCA055": {
+            name: "Mitra",
+            tamil: 75,
+            english: 80,
+            java: 85,
+            python: 90
+        },
+
+        "23bBCA055": {
+            name: "Suba",
+            tamil: 60,
+            english: 70,
+            java: 65,
+            python: 75
+        },
+
+        "26MCA043": {
+            name: "Kalees",
+            tamil: 75,
+            english: 80,
+            java: 85,
+            python: 90
+        }
+
+    };
+
+    function checkResult() {
+
+        let regno = document.getElementById("regno").value.trim();
+
+        let result = document.getElementById("result");
+
+        if (students[regno]) {
+
+            let s = students[regno];
+
+            let total = s.tamil + s.english +
+                        s.java + s.python;
+
+            let percentage = total / 4;
+
+            let status = (
+                s.tamil >= 40 &&
+                s.english >= 40 &&
+                s.java >= 40 &&
+                s.python >= 40
+            ) ? "PASS" : "FAIL";
+
+            result.innerHTML = `
+                <h3>Student Result</h3>
+
+                <p><b>Register No:</b> ${regno}</p>
+                <p><b>Name:</b> ${s.name}</p>
+
+                <hr>
+
+                <p>Tamil: ${s.tamil}</p>
+                <p>English: ${s.english}</p>
+                <p>Java: ${s.java}</p>
+                <p>Python: ${s.python}</p>
+
+                <hr>
+
+                <p><b>Total:</b> ${total} / 400</p>
+                <p><b>Percentage:</b> ${percentage}%</p>
+
+                <h3 class="success">${status}</h3>
+            `;
+
+        } else {
+
+            result.innerHTML = `
+                <h3 class="error">
+                    Roll Number Not Found or Invalid!
+                </h3>
+            `;
+
+        }
+    }
+
+</script>
+
+</body>
+</html>
